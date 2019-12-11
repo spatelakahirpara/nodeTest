@@ -3,7 +3,7 @@ var app= express();
 var bodyParser = require('body-parser');
 
 
-
+console.log("starting");
 app.use((req,res,next)=>{
     res.header('Access-Control-Allow-Origin','*');
     res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
