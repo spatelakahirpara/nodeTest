@@ -30,7 +30,7 @@ app.get('/buildPLB',async function(req,res,next){
         var length= "FINAL_URL".length;
         var url=line.slice(length+1);
         console.log(url);
-        res.send(outputString);
+        // res.send(outputString);
     }
        
     });
@@ -44,6 +44,24 @@ app.get('/buildPLB',async function(req,res,next){
   }); 
 
 app.listen(3000);
+async function call(req,res,next){
+const {stdout,stderr} = await exec("~/Desktop/second.sh");
+outputString=stdout.toString(); 
+console.log("output from the script: "+outputString);
+const lines = outputString.split(/\r?\n/);
+lines.forEach((line) => {
+    if(line.search( "FINAL_URL" )!=-1){
+    var length= "FINAL_URL".length;
+    var url=line.slice(length+1);
+    console.log(url);
+    // res.send(outputString);
+}
+   
+});
+console.log("no url found");
+}
+call();
+
 process.on("unhandledRejection", (reason, p) => {
     console.log(reason + " ************** Unhandled Rejection at Promise ****************** ");
     console.log(p);
